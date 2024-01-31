@@ -2,6 +2,7 @@ const instance = axios.create({
     baseURL: "https://rickandmortyapi.com/api/"
 });
 
+
 const cardsContainer = document.getElementById('cards-container');
 const mainContainer = document.getElementById('main-container');
 const botaoPagAnterior = document.getElementById('paginaAnterior');
@@ -9,31 +10,24 @@ const botaoProxPagina = document.getElementById('proximaPagina');
 
 let paginaAtual = 1;
 
+//Cria os cards
 function createCard(character) {
     const card = document.createElement('div');
-    card.classList.add('card');
+    card.classList.add('col-12','col-sm-6','col-md-4','border-success', 'card','g-5')
     card.innerHTML = `
-      <h2>${character.name}</h2>
-      <img src="${character.image}" alt="${character.name}">
-      <div class="card-info">
-      <p><u><b>Status:</b></u> ${character.status}</p>
-      <p><u><b>Specie:</b></u> ${character.species}</p>
-      <p><u><b>Gender</b></u> ${character.gender}</p>
-      </div>
+    <img src="${character.image}" class="card-img-top mt-3" alt="${character.name}">
+    <div class="card-body">
+      <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >${character.name}</h5>
+      <p class="card-text text-start"><u><b>Status</u>:</b> ${character.status}</p>
+      <p class="card-text text-start" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><u><b>Specie</u>:</b> ${character.species}</p>
+      <a href="#" class="btn btn-success">Saber Mais</i></a>
+    </div>
+  </div>
     `;
     cardsContainer.appendChild(card);
 }
 
-//limpa os cards atuais ao trocar de página
-function limparCards() {
-    cardsContainer.innerHTML = '';
-}
 
-//Ao chegar na primeira ou ultima pagina. Desabilita o botão respectivo.
-function atualizarBotaoPagina() {
-    botaoPagAnterior.disabled = paginaAtual === 1;
-    botaoProxPagina.disabled = paginaAtual >= totalPaginas;
-}
 
 //Cria os cards com os personagens
 function buscarPersonagens(page) {
@@ -42,7 +36,7 @@ function buscarPersonagens(page) {
             const personagens = response.data.results;
 
             personagens.forEach(personagem => {
-                createCard(personagem);
+                    createCard(personagem);
             });
 
             totalPaginas = response.data.info.pages;
@@ -52,6 +46,27 @@ function buscarPersonagens(page) {
             console.error('Erro ao carregar API', error);
         });
 }
+
+//limpa os cards atuais ao trocar de página
+function limparCards() {
+    cardsContainer.innerHTML = '';
+}
+
+//Ao chegar na primeira ou ultima pagina. Desabilita o botão respectivo.
+function atualizarBotaoPagina() {
+    if(paginaAtual===1) {
+        botaoPagAnterior.classList.add('disabled')
+    } else {
+        botaoPagAnterior.classList.remove('disabled')
+    }
+
+    if(paginaAtual >= totalPaginas) {
+        botaoProxPagina.classList.add('disabled')
+    } else {
+        botaoProxPagina.classList.remove('disabled')
+    }
+}
+
 
 //Paginação para voltar a página
 botaoPagAnterior.addEventListener('click', () => {
@@ -63,7 +78,7 @@ botaoPagAnterior.addEventListener('click', () => {
 });
 
 
-//Paginação para voltar a página
+//Paginação para passar a página
 botaoProxPagina.addEventListener('click', () => {
     if (paginaAtual < totalPaginas) {
         paginaAtual++;

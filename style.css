@@ -1,79 +1,45 @@
 body {
-    margin: 0;
-    background-color: #EAFAF1;
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+    background-color: #191919;
+    font-family: monospace, Arial, Helvetica, sans-serif
+    /* background-image: url("./assets/FUNDO_2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 150%; */
+    
 }
 
-header {
-    background-color: #145A32;
-    padding: 20px;
-    text-align: center;
-    width: 100vw;
+.icon-header {
+    width: 100px;
+    animation: rickMortyAnimation 2s infinite; 
 }
 
-.texto-titulo {
-    color: white;
-}
+/* @keyframes rickMortyAnimation {
+    0% { transform: rotate(0); }
+    25% { transform: rotate(10deg); }
+    50% { transform: rotate(-10deg); }
+    75% { transform: rotate(5deg); }
+    100% { transform: rotate(0); }
+  } */
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    width: 100%;
-}
-
-#cards-container {
-    width: 80%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-
-/* !teste responsividade com grid */
-/* @media (max-width: 1000px) {
-  #cards-container {
-      width: 80%;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+  .text-style {
+    color: black;
+    animation: colorChange 3s infinite;
   }
-} */
-/* @media (max-width: 768px) {
-    #cards-container {
-        width: 80%;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-}
-@media (max-width: 540px) {
-    #cards-container {
-        width: 50%;
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 20px;
-    }
-} */
 
-
-
+  /* @keyframes colorChange {
+    0% { color: #fff; }
+      20% { color: #5cb85c; }
+      40% { color: #7fc47f; }
+      60% { color: #a2d9a2; }
+      80% { color: #c5f3c5; }
+      100% { color: #e8ffe8; }
+  } */
 
 .card {
-    border: 3px solid #145A32;
+    background-color: #EAFAF1;
     border-radius: 50px;
-    padding: 10px;
-    text-align: left;
     height: 400px;
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    max-width: 250px;
     transition: transform 0.3s;
 }
 
@@ -87,38 +53,9 @@ main {
 }
 
 footer {
-    padding: 50px;
-    width: 100%;
-    background-color: #333;
-    text-align: center;
-    color: white;
+    height: 400px;
 }
 
-.texto-footer {
-    font-size: small;
-    margin-left: 50px;
-    
-}
-
-.card-info {
-    color: #333;
-    font-size: 12px;
-}
-
-#paginacao {
-    margin-top: 20px;
-}
-
-#paginacao button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    background-color: #145A32;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.image-footer {
-    width: 200px;
-    height: 200px;
+h5 {
+    white-space: nowrap; 
 }
