@@ -1,10 +1,10 @@
 body {
-    background-color: #191919;
-    font-family: monospace, Arial, Helvetica, sans-serif
-    /* background-image: url("./assets/FUNDO_2.jpg");
+    background-color: #262626;
+    font-family: monospace, Arial, Helvetica, sans-serif;
+    background-image: url("./assets/FUNDO_2.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center 150%; */
+    background-size: contain;
+    background-position: center 100%;
     
 }
 
@@ -13,27 +13,27 @@ body {
     animation: rickMortyAnimation 2s infinite; 
 }
 
-/* @keyframes rickMortyAnimation {
+@keyframes rickMortyAnimation {
     0% { transform: rotate(0); }
     25% { transform: rotate(10deg); }
     50% { transform: rotate(-10deg); }
     75% { transform: rotate(5deg); }
     100% { transform: rotate(0); }
-  } */
+}
 
-  .text-style {
+.text-style {
     color: black;
     animation: colorChange 3s infinite;
-  }
+}
 
-  /* @keyframes colorChange {
+@keyframes colorChange {
     0% { color: #fff; }
-      20% { color: #5cb85c; }
-      40% { color: #7fc47f; }
-      60% { color: #a2d9a2; }
-      80% { color: #c5f3c5; }
-      100% { color: #e8ffe8; }
-  } */
+    20% { color: #5cb85c; }
+    40% { color: #7fc47f; }
+    60% { color: #a2d9a2; }
+    80% { color: #c5f3c5; }
+    100% { color: #e8ffe8; }
+}
 
 .card {
     background-color: #EAFAF1;
@@ -56,6 +56,11 @@ footer {
     height: 400px;
 }
 
-h5 {
+.texto-footer {
     white-space: nowrap; 
+    color: #ffffff;
+}
+
+.bgLocal {
+    background-color: #B9F4D3;
 }

@@ -2,7 +2,6 @@ const instance = axios.create({
     baseURL: "https://rickandmortyapi.com/api/"
 });
 
-
 const cardsContainer = document.getElementById('cards-container');
 const mainContainer = document.getElementById('main-container');
 const botaoPagAnterior = document.getElementById('paginaAnterior');
@@ -12,6 +11,7 @@ let paginaAtual = 1;
 
 //Cria os cards
 function createCard(character) {
+
     const card = document.createElement('div');
     card.classList.add('col-12','col-sm-6','col-md-4','border-success', 'card','g-5')
     card.innerHTML = `
@@ -20,23 +20,24 @@ function createCard(character) {
       <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >${character.name}</h5>
       <p class="card-text text-start"><u><b>Status</u>:</b> ${character.status}</p>
       <p class="card-text text-start" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><u><b>Specie</u>:</b> ${character.species}</p>
-      <a href="#" class="btn btn-success">Saber Mais</i></a>
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#characterModal" 
+        onclick="mostrarDetalhes('${character.image}','${character.name}', '${character.status}', 
+            '${character.species}', '${character.gender}', '${character.origin.name}')">Details</button>
     </div>
   </div>
     `;
+    
     cardsContainer.appendChild(card);
 }
 
-
-
 //Cria os cards com os personagens
-function buscarPersonagens(page) {
-    instance.get(`character/?page=${page}`)
+async function buscarPersonagens(page) {
+    await instance.get(`character/?page=${page}`)
+    
         .then(response => {
             const personagens = response.data.results;
-
             personagens.forEach(personagem => {
-                    createCard(personagem);
+                createCard(personagem);
             });
 
             totalPaginas = response.data.info.pages;
@@ -45,6 +46,20 @@ function buscarPersonagens(page) {
         .catch(error => {
             console.error('Erro ao carregar API', error);
         });
+}
+
+
+// Modal com informações adicionais
+function mostrarDetalhes(image, name, status, species, gender, origin) {
+    const modalBody = document.getElementById('characterModalBody');
+    modalBody.innerHTML = `
+        <img src="${image}" class="card-img-top text-center" alt="${name}">
+        <p class="mt-2"><b>Name:</b> ${name}</p>
+        <p><b>Status:</b> ${status}</p>
+        <p><b>Specie:</b> ${species}</p>
+        <p><b>Gender:</b> ${gender}</p>
+        <p><b>Origin:</b> ${origin}</p>
+        `;
 }
 
 //limpa os cards atuais ao trocar de página
@@ -89,3 +104,4 @@ botaoProxPagina.addEventListener('click', () => {
 
 let totalPaginas = 1;
 buscarPersonagens(paginaAtual);
+
