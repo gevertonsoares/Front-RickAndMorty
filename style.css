@@ -5,7 +5,6 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center 100%;
-    
 }
 
 .icon-header {
@@ -64,3 +63,18 @@ footer {
 .bgLocal {
     background-color: #B9F4D3;
 }
+
+.rainbow-name {
+    background: linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff80, #0080ff, #0000ff, #8000ff, #ff00ff);
+    background-size: 1800% 1800%;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: arco-iris 8s linear infinite;
+}
+
+@keyframes arco-iris {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
