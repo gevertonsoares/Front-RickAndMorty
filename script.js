@@ -13,18 +13,18 @@ let paginaAtual = 1;
 function createCard(character) {
 
     const card = document.createElement('div');
-    card.classList.add('col-12','col-sm-6','col-md-4','border-success', 'card','g-5')
+    card.classList.add('border-success', 'card','g-5')
     card.innerHTML = `
     <img src="${character.image}" class="card-img-top mt-3" alt="${character.name}">
     <div class="card-body">
       <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" >${character.name}</h5>
       <p class="card-text text-start"><u><b>Status</u>:</b> ${character.status}</p>
       <p class="card-text text-start" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><u><b>Specie</u>:</b> ${character.species}</p>
+     
       <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#characterModal" 
         onclick="mostrarDetalhes('${character.image}','${character.name}', '${character.status}', 
-            '${character.species}', '${character.gender}', '${character.origin.name}')">Details</button>
+        '${character.species}', '${character.gender}', '${character.origin.name}','${character.location.name}')">Details</button>
     </div>
-  </div>
     `;
     
     cardsContainer.appendChild(card);
@@ -48,9 +48,8 @@ async function buscarPersonagens(page) {
         });
 }
 
-
 // Modal com informações adicionais
-function mostrarDetalhes(image, name, status, species, gender, origin) {
+function mostrarDetalhes(image, name, status, species, gender, origin,location) {
     const modalBody = document.getElementById('characterModalBody');
     modalBody.innerHTML = `
         <img src="${image}" class="card-img-top text-center" alt="${name}">
@@ -59,6 +58,7 @@ function mostrarDetalhes(image, name, status, species, gender, origin) {
         <p><b>Specie:</b> ${species}</p>
         <p><b>Gender:</b> ${gender}</p>
         <p><b>Origin:</b> ${origin}</p>
+        <p><b>Localization:</b> ${location}</p>
         `;
 }
 
