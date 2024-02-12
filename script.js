@@ -4,8 +4,8 @@ const instance = axios.create({
 
 const cardsContainer = document.getElementById('cards-container');
 const mainContainer = document.getElementById('main-container');
-const botaoPagAnterior = document.getElementById('paginaAnterior');
-const botaoProxPagina = document.getElementById('proximaPagina');
+const prevPage = document.getElementById('paginaAnterior');
+const nextPage = document.getElementById('proximaPagina');
 
 let paginaAtual = 1;
 
@@ -31,7 +31,7 @@ function createCard(character) {
 }
 
 //Cria os cards com os personagens
-async function buscarPersonagens(page) {
+async function seachCharacter(page) {
     await instance.get(`character/?page=${page}`)
     
         .then(response => {
@@ -40,7 +40,7 @@ async function buscarPersonagens(page) {
                 createCard(personagem);
             });
 
-            totalPaginas = response.data.info.pages;
+            totalPages = response.data.info.pages;
             atualizarBotaoPagina();
         })
         .catch(error => {
@@ -70,38 +70,38 @@ function limparCards() {
 //Ao chegar na primeira ou ultima pagina. Desabilita o botão respectivo.
 function atualizarBotaoPagina() {
     if(paginaAtual===1) {
-        botaoPagAnterior.classList.add('disabled')
+        prevPage.classList.add('disabled')
     } else {
-        botaoPagAnterior.classList.remove('disabled')
+        prevPage.classList.remove('disabled')
     }
 
-    if(paginaAtual >= totalPaginas) {
-        botaoProxPagina.classList.add('disabled')
+    if(paginaAtual >= totalPages) {
+        nextPage.classList.add('disabled')
     } else {
-        botaoProxPagina.classList.remove('disabled')
+        nextPage.classList.remove('disabled')
     }
 }
 
 
 //Paginação para voltar a página
-botaoPagAnterior.addEventListener('click', () => {
+prevPage.addEventListener('click', () => {
     if (paginaAtual > 1) {
         paginaAtual--;
         limparCards();
-        buscarPersonagens(paginaAtual);
+        seachCharacter(paginaAtual);
     }
 });
 
 
 //Paginação para passar a página
-botaoProxPagina.addEventListener('click', () => {
-    if (paginaAtual < totalPaginas) {
+nextPage.addEventListener('click', () => {
+    if (paginaAtual < totalPages) {
         paginaAtual++;
         limparCards();
-        buscarPersonagens(paginaAtual);
+        seachCharacter(paginaAtual);
     }
 });
 
-let totalPaginas = 1;
-buscarPersonagens(paginaAtual);
+let totalPages = 1;
+seachCharacter(paginaAtual);
 
